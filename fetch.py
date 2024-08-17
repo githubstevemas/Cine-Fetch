@@ -4,12 +4,16 @@ import requests
 
 from dotenv import load_dotenv
 
+from generate_html import generate_html
+
 load_dotenv()
 
 API_KEY = os.getenv('API_KEY')
 BASE_URL = 'https://api.themoviedb.org/3'
 IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500'
 LANGUAGE = 'fr-FR'
+
+MOVIES_FOLDER = r'C:\Users\Steve\Downloads\[Vidz]'
 
 
 def get_genre_dict():
@@ -57,40 +61,48 @@ def save_synopsis(movie, save_path):
 
 
 def move_movie_file(movie_file, movie_folder):
-    original_path = os.path.join(movies_folder, movie_file)
+    original_path = os.path.join(MOVIES_FOLDER, movie_file)
     new_path = os.path.join(movie_folder, movie_file)
     shutil.move(original_path, new_path)
+    print(f"Movie {movie_file} OK.")
 
 
-movies_folder = r'C:\Users\Steve\Downloads\[Vidz]'
+def main():
 
-films_folder = os.path.join(movies_folder, '[Films]')
+    films_folder = os.path.join(MOVIES_FOLDER, '[Films]')
 
-genre_dict = get_genre_dict()
+    genre_dict = get_genre_dict()
 
-for movie_file in os.listdir(movies_folder):
-    if movie_file.endswith(('.mp4', '.avi', '.mkv')):
-        movie_name = os.path.splitext(movie_file)[0]
-        movie = search_movie(movie_name)
-        if movie:
-            genre_ids = movie.get('genre_ids')
-            genre_name = 'Unknown'
-            if genre_ids:
-                genre_id = genre_ids[0]
-                genre_name = genre_dict.get(genre_id, 'Unknown')
+    for movie_file in os.listdir(MOVIES_FOLDER):
+        if movie_file.endswith(('.mp4', '.avi', '.mkv')):
+            movie_name = os.path.splitext(movie_file)[0]
+            movie = search_movie(movie_name)
+            if movie:
+                genre_ids = movie.get('genre_ids')
+                genre_name = 'Unknown'
+                if genre_ids:
+                    genre_id = genre_ids[0]
+                    genre_name = genre_dict.get(genre_id, 'Unknown')
 
-            genre_folder = os.path.join(films_folder, genre_name)
-            os.makedirs(genre_folder, exist_ok=True)
+                genre_folder = os.path.join(films_folder, genre_name)
+                os.makedirs(genre_folder, exist_ok=True)
 
-            movie_folder = os.path.join(genre_folder, movie_name)
-            os.makedirs(movie_folder, exist_ok=True)
+                movie_folder = os.path.join(genre_folder, movie_name)
+                os.makedirs(movie_folder, exist_ok=True)
 
-            poster_save_path = os.path.join(movie_folder, f"{movie_name}.jpg")
-            synopsis_save_path = os.path.join(movie_folder,
-                                              f"{movie_name}.txt")
+                poster_save_path = os.path.join(movie_folder,
+                                                f"{movie_name}.jpg")
+                synopsis_save_path = os.path.join(movie_folder,
+                                                  f"{movie_name}.txt")
 
-            download_poster(movie, poster_save_path)
-            save_synopsis(movie, synopsis_save_path)
-            move_movie_file(movie_file, movie_folder)
-        else:
-            print(f"Nothing found for {movie_name}.")
+                download_poster(movie, poster_save_path)
+                save_synopsis(movie, synopsis_save_path)
+                move_movie_file(movie_file, movie_folder)
+            else:
+                print(f"Nothing found for {movie_name}.")
+
+    generate_html()
+
+
+if __name__ == "__main__":
+    main()
