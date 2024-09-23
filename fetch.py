@@ -67,7 +67,7 @@ def move_movie_file(movie_file, movie_folder):
     print(f"Movie {movie_file} OK.")
 
 
-def main():
+def fetch():
 
     films_folder = os.path.join(MOVIES_FOLDER, '[Films]')
 
@@ -105,4 +105,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    fetch()

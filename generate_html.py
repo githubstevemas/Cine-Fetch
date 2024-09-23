@@ -33,6 +33,7 @@ def generate_html():
                 font-size: 14px;
             }}
             .film {{
+                position: relative;
                 background-color: white;
                 border-radius: 8px;
                 box-shadow: 0 4px 7px rgba(0, 0, 0, 0.3);
@@ -45,6 +46,27 @@ def generate_html():
             .film img {{
                 max-width: 100%;
                 border-radius: 2px;
+            }}
+            .modal {{
+                display: none;
+                position: absolute;
+                bottom: 10%;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: rgba(0, 0, 0, 0.8);
+                color: white;
+                padding-left: 20px;
+                padding-right: 20px;
+                border-radius: 8px;
+                width: 340px;
+                z-index: 1;
+                text-align: left;
+                font-size: 14px;
+            }}
+            .film:hover .modal {{
+                display: block;
+                visibility: visible;
+                opacity: 1;
             }}
         </style>
     </head>
@@ -62,6 +84,10 @@ def generate_html():
         <img src="{poster}" alt="{title}">
         <span class="film-title">{title}</span><br>
         <span class="film-genre">{genre}</span>
+        <div class="modal">
+            <h2>{title}</h2>
+            <p>{synopsis}</p>
+        </div>
     </div>
     '''
 
