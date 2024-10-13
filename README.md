@@ -2,6 +2,8 @@
 
 CineFetch is a Python project that allows you to download synopses and posters of movies present on your computer using the [The Movie Database (TMDb) API](https://www.themoviedb.org/documentation/api).
 
+<br>
+
 ## Features
 
 - Automatically detect movies on local
@@ -9,10 +11,14 @@ CineFetch is a Python project that allows you to download synopses and posters o
 - Download movie posters
 - Generate html with movie db
 
+<br>
+
 ## Prerequisites
 
 - Python 3.6 or higher
 - An API key from [The Movie Database](https://www.themoviedb.org/documentation/api)
+
+<br>
 
 ## Installation
 
@@ -36,10 +42,16 @@ API_KEY = 'your_api_key_here'
 python fetch.py
 ```
 
-
-
 > [!NOTE]
 > You can change movies path by editing the main file.
+
+<br>
+
+## Download exe file
+
+You can download the latest version of the executable on the [releases page](https://github.com/githubstevemas/Cine-Fetch/releases).
+
+<br>
 
 ## Contact
 Feel free to [mail me](mailto:mas.ste@gmail.com) for any questions, comments, or suggestions.
