@@ -47,9 +47,9 @@ python fetch.py
 
 <br>
 
-## Download exe file
+## Download Windows executable
 
-You can download the latest version of the executable on the [releases page](https://github.com/githubstevemas/Cine-Fetch/releases).
+You can download the latest portable version of the executable on the [releases page](https://github.com/githubstevemas/Cine-Fetch/releases).
 
 <br>
 
